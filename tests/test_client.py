@@ -3,18 +3,20 @@
 用 pty 伪终端充当设备，这样不用接真机也能覆盖完整链路：
 组帧 → 串口收发 → 半双工回显 → 解帧 → 换算 → 信号。
 
-Windows 上没有 pty，整个模块跳过。
+Windows 上没有 pty 模块，整个模块在收集阶段跳过。
 """
 
 from __future__ import annotations
 
 import os
-import pty
 import time
 
 import pytest
 
-pytestmark = pytest.mark.skipif(os.name != "posix", reason="需要 pty 伪终端")
+# pty 只在 POSIX 上存在。这里必须用 importorskip：模块级 skipif 标记要等模块导入
+# 完成才生效，而 Windows 上 import pty 会在收集阶段就抛 ModuleNotFoundError，
+# 结果是整个测试会话中断（collection error），而不是优雅跳过。
+pty = pytest.importorskip("pty", reason="需要 pty 伪终端，Windows 上不可用")
 
 # 必须在创建 QApplication 之前设置，否则没有显示器会直接崩
 os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
