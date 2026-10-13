@@ -1,0 +1,8 @@
+# 换行符统一：仓库内一律 LF，避免 Windows 上编辑后整份文件变成 CRLF 造成大片假 diff
+* text=auto eol=lf
+
+# 二进制文件不做文本转换与行级 diff
+*.pdf binary
+*.png binary
+*.jpg binary
+*.ico binary
