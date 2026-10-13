@@ -6,8 +6,8 @@ import csv
 from datetime import datetime
 from pathlib import Path
 
-from temperature_acq import device as dev
-from temperature_acq.recorder import Recorder, timestamp_text
+from me31_scope import device as dev
+from me31_scope.recorder import Recorder, timestamp_text
 
 
 def _read(path: Path) -> list[list[str]]:

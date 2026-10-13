@@ -21,8 +21,8 @@ os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 
 from PySide6.QtWidgets import QApplication  # noqa: E402
 
-from temperature_acq import rtu  # noqa: E402
-from temperature_acq.client import DeviceClient  # noqa: E402
+from me31_scope import rtu  # noqa: E402
+from me31_scope.client import DeviceClient  # noqa: E402
 
 TEMP_RAWS = [0x012C, 0x00C8, 0xFC19, 0x00FA]
 OFFSET_RAWS = [0x0000, 0x0055, 0xFFAB, 0xFFFF]

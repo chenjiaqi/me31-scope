@@ -1,7 +1,7 @@
 [project]
-name = "temperature-acq"
+name = "me31-scope"
 version = "0.1.0"
-description = "Add your description here"
+description = "ME31-XDXX0400 四通道 PT100 温度采集上位机（RS485 / Modbus RTU）"
 readme = "README.md"
 authors = [
     { name = "jiakie", email = "chenjiaqi77@dingtalk.com" }
@@ -14,7 +14,7 @@ dependencies = [
 ]
 
 [project.scripts]
-temperature-acq = "temperature_acq:main"
+me31-scope = "me31_scope:main"
 
 [build-system]
 requires = ["uv_build>=0.12.17,<0.13.0"]

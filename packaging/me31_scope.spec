@@ -3,9 +3,9 @@
 
 在项目根目录执行：
 
-    uv run --with pyinstaller pyinstaller packaging/temperature_acq.spec --noconfirm --clean
+    uv run --with pyinstaller pyinstaller packaging/me31_scope.spec --noconfirm --clean
 
-产物为 ``dist/temperature-acq/`` 目录（Windows 下里面有 ``temperature-acq.exe``）。
+产物为 ``dist/me31-scope/`` 目录（Windows 下里面有 ``me31-scope.exe``）。
 整个目录拷到目标机器上双击 exe 即可运行，目标机器无需安装 Python。
 
 注意：PyInstaller 不支持交叉编译，Windows 包必须在 Windows 上构建
@@ -15,7 +15,7 @@
 from pathlib import Path
 
 PROJECT_ROOT = Path(SPECPATH).resolve().parent
-APP_NAME = "temperature-acq"
+APP_NAME = "me31-scope"
 
 # PySide6 完整安装约 1 GB，这里把用不到的 Qt 模块从依赖图里摘掉。
 # 程序真正用到的只有 QtCore / QtGui / QtWidgets / QtSerialPort，

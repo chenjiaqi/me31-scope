@@ -17,8 +17,8 @@ os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 
 from PySide6.QtWidgets import QApplication  # noqa: E402
 
-from temperature_acq import device as dev  # noqa: E402
-from temperature_acq.gui import Y_MIN_SPAN, Y_PADDING, MainWindow  # noqa: E402
+from me31_scope import device as dev  # noqa: E402
+from me31_scope.gui import Y_MIN_SPAN, Y_PADDING, MainWindow  # noqa: E402
 
 T0 = 1_700_000_000.0
 WINDOW = 300.0  # 与 DEFAULT_WINDOW_MINUTES = 5 对应

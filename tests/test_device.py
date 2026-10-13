@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from temperature_acq import device as dev
+from me31_scope import device as dev
 
 
 def test_decode_positive_temperature() -> None:

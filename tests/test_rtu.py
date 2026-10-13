@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from temperature_acq import rtu
+from me31_scope import rtu
 
 
 def _response(raws: list[int]) -> bytes:

@@ -33,12 +33,12 @@ jobs:
           QT_QPA_PLATFORM: offscreen
 
       - name: 打包
-        run: uv run --with pyinstaller pyinstaller packaging/temperature_acq.spec --noconfirm --clean
+        run: uv run --with pyinstaller pyinstaller packaging/me31_scope.spec --noconfirm --clean
 
       - name: 冒烟测试（确认 exe 能正常启动）
         run: |
           $env:QT_QPA_PLATFORM = 'offscreen'
-          $process = Start-Process -FilePath 'dist\temperature-acq\temperature-acq.exe' -PassThru
+          $process = Start-Process -FilePath 'dist\me31-scope\me31-scope.exe' -PassThru
           Start-Sleep -Seconds 10
           if ($process.HasExited) {
             throw "打包后的程序启动即退出，退出码 $($process.ExitCode)"
@@ -48,6 +48,6 @@ jobs:
       - name: 上传产物
         uses: actions/upload-artifact@v4
         with:
-          name: temperature-acq-windows-x64
-          path: dist/temperature-acq
+          name: me31-scope-windows-x64
+          path: dist/me31-scope
           if-no-files-found: error

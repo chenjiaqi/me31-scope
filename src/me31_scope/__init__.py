@@ -13,7 +13,7 @@ def main() -> None:
     from .gui import MainWindow
 
     app = QApplication(sys.argv)
-    app.setApplicationName("temperature-acq")
+    app.setApplicationName("me31-scope")
     window = MainWindow()
     window.show()
     sys.exit(app.exec())
