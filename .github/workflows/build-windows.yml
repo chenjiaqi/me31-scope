@@ -1,0 +1,53 @@
+name: 构建 Windows 程序
+
+# PyInstaller 不支持交叉编译，所以 Windows 包只能在 Windows 上打。
+# 手工触发：仓库 Actions 页面 -> 「构建 Windows 程序」-> Run workflow
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: 安装依赖
+        run: uv sync --frozen
+
+      - name: 运行测试
+        run: uv run pytest -q
+        env:
+          QT_QPA_PLATFORM: offscreen
+
+      - name: 打包
+        run: uv run --with pyinstaller pyinstaller packaging/temperature_acq.spec --noconfirm --clean
+
+      - name: 冒烟测试（确认 exe 能正常启动）
+        run: |
+          $env:QT_QPA_PLATFORM = 'offscreen'
+          $process = Start-Process -FilePath 'dist\temperature-acq\temperature-acq.exe' -PassThru
+          Start-Sleep -Seconds 10
+          if ($process.HasExited) {
+            throw "打包后的程序启动即退出，退出码 $($process.ExitCode)"
+          }
+          Stop-Process -Id $process.Id
+
+      - name: 上传产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: temperature-acq-windows-x64
+          path: dist/temperature-acq
+          if-no-files-found: error
